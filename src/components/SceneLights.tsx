@@ -1,49 +1,42 @@
 /**
- * 演播室软箱灯光 rig
- * 6 盏方向光组成矩形软光源，模拟左侧高位柔光窗
+ * 演播室灯光 rig
+ * 针对极微倒角烟盒：主光源柔边但保持形状，逆光突出轮廓
  */
 export function SoftBoxLightRig() {
-  // 软箱排列：3x2 网格
-  const rigCenter = [-3.0, 3.4, 3.0];
-  const rigU = [1.35, 0, -0.45]; // 宽度方向
-  const rigV = [0, 1.05, 0.35]; // 高度方向
-  const offsets = [
-    [-1, -0.5], [0, -0.5], [1, -0.5],
-    [-1,  0.5], [0,  0.5], [1,  0.5],
-  ];
-
   return (
     <group>
-      {/* 主软箱光源 */}
-      {offsets.map(([u, v], i) => {
-        const x = rigCenter[0] + u * rigU[0] + v * rigV[0];
-        const y = rigCenter[1] + u * rigU[1] + v * rigV[1];
-        const z = rigCenter[2] + u * rigU[2] + v * rigV[2];
-        return (
-          <directionalLight
-            key={i}
-            position={[x, y, z]}
-            color={0xdce8fa}
-            intensity={0.55}
-          />
-        );
-      })}
+      {/* 环境光 */}
+      <ambientLight intensity={0.3} color={0xffffff} />
 
-      {/* 右侧暖色轮廓光 */}
+      {/* 主光源：左前方，柔和但有一定硬度，突出极微倒角形状 */}
       <directionalLight
-        position={[4.5, -1.8, -2]}
-        color={0xffe8d2}
-        intensity={1.5}
+        position={[-3.5, 3.8, 2.8]}
+        color={0xe8f4ff}
+        intensity={1.1}
       />
 
-      {/* 扫光：窄聚光灯打边缘，增强高光 */}
+      {/* 补光：右后方打轮廓，让棱角从背景分离 */}
+      <directionalLight
+        position={[3.2, 1.5, -3.0]}
+        color={0xfff0e6}
+        intensity={0.7}
+      />
+
+      {/* 顶光：柔和打亮顶面 */}
+      <directionalLight
+        position={[0, 4.8, 0]}
+        color={0xffffff}
+        intensity={0.6}
+      />
+
+      {/* 窄聚光灯强调棱角交界 */}
       <spotLight
-        position={[4.2, 1.2, 1.4]}
-        intensity={9}
+        position={[4.5, 3.5, 1.8]}
+        intensity={6}
         angle={Math.PI / 20}
-        penumbra={0.95}
+        penumbra={0.3}
         decay={2}
-        target-position={[0, 0, 0.12]}
+        target-position={[0, 0, 0]}
       />
     </group>
   );
