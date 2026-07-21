@@ -1,0 +1,13 @@
+name = "cig3d"
+compatibility_date = "2026-07-21"
+compatibility_flags = ["JOURNAL_QUICk"]
+
+[env]
+  production = { compatibility_flags = ["JOURNAL_QUICK"] }
+
+[build]
+  command = "npm install && npm run build"
+  directory = "dist"
+
+[site]
+  bucket_name = "cig3d"
