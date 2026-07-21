@@ -20,13 +20,18 @@ export interface CigarettePackData {
     bottom: string;
   };
   /** 防伪标注点列表 */
-  annotations: {
-    id: string;
-    /** 标注点在 3D 空间的坐标 */
-    position: [number, number, number];
-    /** 标注标题，如 "中华防伪标志" */
-    title: string;
-    /** 鉴别描述，说明真伪差异 */
-    description: string;
-  }[];
+  annotations: Annotation[];
+}
+
+/**
+ * 单个防伪标注
+ */
+export interface Annotation {
+  id: string;
+  /** 标注点在 3D 空间的坐标 */
+  position: [number, number, number];
+  /** 标注标题，如 "中华防伪标志" */
+  title: string;
+  /** 鉴别描述，说明真伪差异 */
+  description: string;
 }
