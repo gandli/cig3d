@@ -4,12 +4,12 @@
   "spec": "84mm 硬盒 20支",
   "dimensions": [8.8, 8.9, 2.2],
   "textures": {
-    "front": "textures/zhonghua-hard/front.svg",
-    "back": "textures/zhonghua-hard/back.svg",
-    "left": "textures/zhonghua-hard/left.svg",
-    "right": "textures/zhonghua-hard/right.svg",
-    "top": "textures/zhonghua-hard/top.svg",
-    "bottom": "textures/zhonghua-hard/bottom.svg"
+    "front": "textures/zhonghua-hard/front.jpg",
+    "back": "textures/zhonghua-hard/back.jpg",
+    "left": "textures/zhonghua-hard/left.jpg",
+    "right": "textures/zhonghua-hard/right.jpg",
+    "top": "textures/zhonghua-hard/top.jpg",
+    "bottom": "textures/zhonghua-hard/bottom.jpg"
   },
   "annotations": [
     {

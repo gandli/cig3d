@@ -3,19 +3,18 @@ import { OrbitControls } from '@react-three/drei';
 import { EffectComposer, DepthOfField, Bloom, ChromaticAberration, Vignette } from '@react-three/postprocessing';
 import { SoftBoxLightRig } from './SceneLights';
 import { CigaretteBox } from './CigaretteBox';
-import type { CigarettePackData, Annotation } from '@/types';
+import type { CigarettePackData } from '@/types';
 
 interface SceneProps {
   data: CigarettePackData;
   focused: boolean;
   isMobile: boolean;
-  onAnnotationClick: (ann: Annotation) => void;
 }
 
 /**
  * 主场景：产品摄影级布光 + 后期处理
  */
-export function Scene({ data, focused: _focused, isMobile, onAnnotationClick }: SceneProps) {
+export function Scene({ data, focused: _focused, isMobile }: SceneProps) {
   // 移动端适配：FOV 更大，让相机更远，盒子更完整显示
   const cameraFov = isMobile ? 45 : 35;
   const cameraZ = isMobile ? 5.5 : 5;
@@ -34,20 +33,14 @@ export function Scene({ data, focused: _focused, isMobile, onAnnotationClick }: 
       {/* 演播室灯光 */}
       <SoftBoxLightRig />
 
-      {/* 背景环境 — 大理石渐变地板 */}
-      <mesh position={[0, 0, -10]}>
-        <planeGeometry args={[46, 46]} />
-        <meshBasicMaterial color="#e8e4dc" />
-      </mesh>
-
       {/* 烟盒主体 */}
-      <CigaretteBox data={data} onAnnotationClick={onAnnotationClick} />
+      <CigaretteBox data={data} />
 
       {/* 交互控制：拖拽旋转缩放 */}
       <OrbitControls
-        enablePan={false}
-        minDistance={2.5}
-        maxDistance={isMobile ? 8 : 10}
+        enablePan={true}
+        minDistance={1.2}
+        maxDistance={isMobile ? 15 : 20}
         enableDamping
         dampingFactor={0.05}
         rotateSpeed={isMobile ? 0.8 : 1}

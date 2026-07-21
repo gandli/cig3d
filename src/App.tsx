@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Scene } from './components/Scene';
-import { AnnotationPopup } from './components/AnnotationPopup';
-import type { Annotation } from '@/types';
 import type { CigarettePackData } from '@/types';
 import packData from './data/zhonghua-hard.json';
 import './App.css';
@@ -25,11 +23,10 @@ function useMobile() {
 }
 
 /**
- * 根组件：管理相机聚焦状态和标注弹窗
+ * 根组件：管理相机聚焦状态
  */
 function App() {
   const [focused, setFocused] = useState(false);
-  const [selectedAnnotation, setSelectedAnnotation] = useState<Annotation | null>(null);
   const isMobile = useMobile();
 
   // 点击盒子 → 切换聚焦状态
@@ -38,29 +35,16 @@ function App() {
       setFocused(true);
     } else {
       setFocused(false);
-      setSelectedAnnotation(null);
     }
-  };
-
-  const handleAnnotationClick = (ann: Annotation) => {
-    setSelectedAnnotation(ann);
-  };
-
-  const handleCloseAnnotation = () => {
-    setSelectedAnnotation(null);
   };
 
   // 双击 → 复位
   const handleDoubleClick = () => {
     setFocused(false);
-    setSelectedAnnotation(null);
   };
 
   return (
-    <div
-      className="w-full h-screen overflow-hidden relative safe-top safe-bottom"
-      onDoubleClick={handleDoubleClick}
-    >
+    <div className="w-full h-screen overflow-hidden relative safe-top safe-bottom" onDoubleClick={handleDoubleClick}>
       {/* 顶部标题栏 */}
       <div className="absolute top-4 left-0 right-0 z-10 pointer-events-none px-4">
         <h1 className="text-center text-[#3c342a] text-sm md:text-base tracking-[0.4em] font-medium opacity-70">
@@ -74,15 +58,8 @@ function App() {
           data={typedPackData}
           focused={focused}
           isMobile={isMobile}
-          onAnnotationClick={handleAnnotationClick}
         />
       </div>
-
-      {/* 防伪标注弹窗 */}
-      <AnnotationPopup
-        annotation={selectedAnnotation}
-        onClose={handleCloseAnnotation}
-      />
 
       {/* 重置视角按钮 */}
       <button
