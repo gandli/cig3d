@@ -31,7 +31,12 @@ export function CigaretteBox({ data }: CigaretteBoxProps) {
   }, [data]);
 
   function createMat(loader: THREE.TextureLoader, url: string) {
-    const tex = loader.load(url);
+    const tex = loader.load(url, 
+      undefined, 
+      (error) => {
+        console.error(`[cig3d] Failed to load texture: ${url}`, error);
+      }
+    );
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.anisotropy = 32;
     return new THREE.MeshStandardMaterial({
