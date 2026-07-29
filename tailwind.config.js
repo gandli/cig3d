@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'cig-paper': '#d6d0c6',
+        'cig-text': '#3c342a',
+      },
+    },
   },
   plugins: [],
 }
