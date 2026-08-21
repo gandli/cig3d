@@ -32,7 +32,7 @@ npm run build
 
 ## 项目结构
 
-```
+```text
 cig3d/
 ├── public/
 │   └── textures/          # 包装纹理资产
@@ -84,7 +84,7 @@ interface CigarettePackData {
 }
 ```
 
-##  roadmap
+## Roadmap
 
 - [x] MVP：中华（硬）单盒六面体展示 + 交互 + 防伪标注
 - [ ] 一条烟展开 → 10 盒排列
